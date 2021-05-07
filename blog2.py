@@ -37,7 +37,7 @@ class LoginForm(Form):
     nickname = StringField("Kullanıcı Adı:")
     password = PasswordField("Şifre:")
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='C:\Users\emre-\OneDrive\Masaüstü\erisblog\templates)
 app.config["DEBUG"] = True
 
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
