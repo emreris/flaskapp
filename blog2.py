@@ -5,6 +5,7 @@ from passlib.handlers.sha2_crypt import sha256_crypt
 from functools import wraps
 import os
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
 
 UPLOAD_FOLDER = '/static'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -37,6 +38,19 @@ class LoginForm(Form):
     password = PasswordField("Şifre:")
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
+
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+    username="emreris",
+    password="suleymanemreeris.2001",
+    hostname="emreris.mysql.pythonanywhere-services.com",
+    databasename="emreris$erisblog",
+)
+app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
 
 app.secret_key = "erisblog"
 app.config["MYSQL_HOST"] = "localhost"
